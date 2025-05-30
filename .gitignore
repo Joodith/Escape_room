@@ -1,3 +1,4 @@
 .env
 backend/venv
 frontend/node_modules
+frontend/build

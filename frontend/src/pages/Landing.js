@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Question.css';
+import { API_BASE_URL } from '../config';
 
 function Landing() {
   const navigate = useNavigate();
@@ -8,7 +9,7 @@ function Landing() {
 
   useEffect(() => {
     // Fetch all question uuids from the backend (or hardcode for now)
-    fetch('/api/all-question-uuids')
+    fetch(`${API_BASE_URL}/api/all-question-uuids`)
       .then(res => res.json())
       .then(data => {
         setUuids(data.uuids);

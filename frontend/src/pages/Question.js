@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './Question.css';
+import { API_BASE_URL } from '../config';
 
 const TOTAL_ROOMS = 3;
 
@@ -35,7 +36,7 @@ function Question() {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`/api/question/${uuid}`)
+    fetch(`${API_BASE_URL}/api/question/${uuid}`)
       .then(res => res.json())
       .then(q => {
         setQuestion(q);
@@ -43,7 +44,7 @@ function Question() {
         setOpenDoor(false); // Reset open door state on room change
         setShowOpenMsg(false);
         if (q.id === 1) {
-          fetch('/api/question/1/guess');
+          fetch(`${API_BASE_URL}/api/question/1/guess`);
         }
       });
   }, [uuid]);
@@ -51,7 +52,7 @@ function Question() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setFeedback('');
-    const res = await fetch('/api/validate', {
+    const res = await fetch(`${API_BASE_URL}/api/validate`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ qid: question.id, answer, code })
@@ -91,7 +92,7 @@ function Question() {
   const handlePromptSubmit = async (e) => {
     e.preventDefault();
     setSystemResponse('');
-    const res = await fetch('/api/question/2/prompt', {
+    const res = await fetch(`${API_BASE_URL}/api/question/2/prompt`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ prompt })
@@ -105,7 +106,7 @@ function Question() {
     e.preventDefault();
     setFeedback('');
     // Validate code for question 2
-    const res = await fetch('/api/validate', {
+    const res = await fetch(`${API_BASE_URL}/api/validate`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ qid: question.id, answer: answer, code })
@@ -151,7 +152,7 @@ function Question() {
     e.preventDefault();
     setFinalFeedback('');
     setFinalLoading(true);
-    const res = await fetch('/api/message/validate', {
+    const res = await fetch(`${API_BASE_URL}/api/message/validate`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message: finalMessage })
