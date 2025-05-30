@@ -4,3 +4,4 @@ pyjwt
 requests
 qrcode
 Pillow
+gunicorn
