@@ -32,7 +32,7 @@ QUESTIONS = [
         'id': 1,
         'uuid': str(uuid.uuid4()),
         'encrypted': 'Yjcv ku gkijv rnwu hkxg?',  # Caesar shift 2 for 'What is eight plus five?'
-        'hint': 'Your keyboard has these - >  shift ',
+        'hint': 'You keyboard has these keys > shift\nFYI: Its an encoded 4 digit key:Explore !!!',
         'image': '/door-1.jpg',
         'answer': '3133',  # hex encoding of '13'
         'data_code': 'hex',

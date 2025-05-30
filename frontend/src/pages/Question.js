@@ -85,7 +85,7 @@ function Question() {
         }, 900);
       }
     } else {
-      setFeedback(result.error || 'Try again!');
+      setFeedback('Better luck next time');
     }
   };
 
@@ -128,7 +128,7 @@ function Question() {
         navigate(`/question/${getNextRoomUuid()}`);
       }, 4000);
     } else {
-      setFeedback(result.error || 'Try again!');
+      setFeedback('Better luck next time');
     }
   };
 
@@ -141,7 +141,7 @@ function Question() {
       setShowQr(true);
       setQrSrc('data:image/png;base64,' + question.encrypted);
     } else {
-      setDecodedError('Incorrect decoded value. Try again!');
+      setDecodedError('Better luck next time');
       setDecodedSuccess(false);
       setShowQr(false);
     }
@@ -162,7 +162,7 @@ function Question() {
     if (result.success) {
       navigate('/victory');
     } else {
-      setFinalFeedback(result.error || 'Try again!');
+      setFinalFeedback('Better luck next time');
     }
   };
 
@@ -245,7 +245,7 @@ function Question() {
               >Ask</button>
             </form>
             {chatResponse && (
-              <div style={{ color: '#f7c873', fontFamily: 'monospace', fontSize: '1.05rem', marginTop: 10 }}>{chatResponse}</div>
+              <div style={{ color: '#00ff5a', fontFamily: 'monospace', fontSize: '1.05rem', marginTop: 10 }}>{chatResponse}</div>
             )}
             {chatUsed && <div style={{ color: '#b8b8b8', fontSize: '0.95rem', marginTop: 6, fontStyle: 'italic' }}>(The chatbot will not answer more questions...)</div>}
           </div>
@@ -261,9 +261,9 @@ function Question() {
                 disabled={finalLoading}
               />
             </div>
+            {finalFeedback && <div style={{ color: '#f55', marginTop: 8, fontWeight: 'bold', fontSize: '1.05rem' }}>{finalFeedback}</div>}
             <button type="submit" disabled={finalLoading}>Exit Room</button>
           </form>
-          {finalFeedback && <div style={{ color: '#f55', marginTop: 16 }}>{finalFeedback}</div>}
         </div>
       </div>
     );
@@ -318,7 +318,7 @@ function Question() {
               </div>
             </form>
             {systemResponse && (
-              <div style={{ color: '#7f5af0', marginTop: 12, fontFamily: 'monospace', fontSize: '1.05rem' }}>{systemResponse}</div>
+              <div style={{ color: '#00ff5a', marginTop: 12, fontFamily: 'monospace', fontSize: '1.05rem' }}>{systemResponse}</div>
             )}
             <form onSubmit={handleQ2Unlock} style={{ marginTop: '2rem' }}>
               <div>
@@ -330,9 +330,9 @@ function Question() {
                   required
                 />
               </div>
+              {feedback && <div style={{ color: '#f55', marginTop: 8, fontWeight: 'bold', fontSize: '1.05rem' }}>{feedback}</div>}
               <button type="submit">Unlock Next Room</button>
             </form>
-            {feedback && <div style={{ color: '#f55', marginTop: 16 }}>{feedback}</div>}
           </>
         ) : (
         <form onSubmit={handleSubmit} style={{ marginTop: '2rem' }}>
@@ -346,8 +346,8 @@ function Question() {
             />
           </div>
           {question.id === 1 ? (
-            <div style={{ color: '#b8b8b8', fontSize: '0.98rem', marginTop: 8, fontStyle: 'italic' }}>
-              FYI: It's a secret key
+            <div style={{ color: '#00ff5a', fontSize: '0.98rem', marginTop: 8, fontStyle: 'italic' }}>
+              FYI:  Its an encoded 4 digit key:Explore !!!
             </div>
           ) : (
             <div style={{ marginTop: 12 }}>
@@ -360,6 +360,7 @@ function Question() {
               />
             </div>
           )}
+          {feedback && <div style={{ color: '#f55', marginTop: 8, fontWeight: 'bold', fontSize: '1.05rem' }}>{feedback}</div>}
           <button type="submit">Unlock Next Room</button>
         </form>
         )}
